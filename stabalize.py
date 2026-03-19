@@ -47,7 +47,8 @@ def stabilize_video(input_path, output_path):
     def moving_average(curve, radius):
         window_size = 2 * radius + 1
         f = np.ones(window_size) / window_size
-        curve_pad = np.lib.pad(curve, (radius, radius), 'edge')
+        # 使用 np.pad 替代 np.lib.pad
+        curve_pad = np.pad(curve, (radius, radius), mode='edge')
         return np.convolve(curve_pad, f, mode='valid')
 
     # 平滑半径，越大越平稳但黑边越多
